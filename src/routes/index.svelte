@@ -1,8 +1,18 @@
 <script lang="ts">
-  import { theme } from './store'
-  import ToggleTheme from '$lib/ToggleTheme.svelte'
-  import Counter from '$lib/Counter.svelte'
-  import Timer from '$lib/Timer.svelte'
+  import Navbar from '../lib/components/Navbar.svelte';
+  import Menu from '../lib/components/Menu.svelte';
+  import Tasks from '../lib/components/Tasks.svelte';
+
+
+  let name = 'Miguel' // for banner name
+  let tasks = [
+    { id: '0', title: 'Feed The Dogs!', description: 'Remember to feed phairo and phaira!', status: 'Pending'},
+    { id: '1', title: 'Study UI/UX Design Best Practices', description: 'Catch up on saved ui/ux videos on coursera', status: 'Pending'},
+    { id: '2', title: 'Meeting With Client', description: 'E-commerce App Test', status: 'Completed'}
+  ]
+
+
+
 </script>
 
 <svelte:head>
@@ -36,48 +46,11 @@
   />
 </svelte:head>
 
-<h1 class="text-5xl font-extrabold mb-2">Hello {$theme} world!</h1>
-<h2 class="text-3xl font-bold mb-4">Now using SvelteKit beta</h2>
+<Navbar></Navbar>
+<Menu name={name}></Menu>
+<Tasks tasks={tasks}></Tasks>
 
-<pre>
-@sveltejs/kit 1.0.0.next-110
-@sveltejs/adapter-static 1.0.0.next-12
-</pre>
-
-<ToggleTheme />
-
-<blockquote class="text-xl p-2 bg-gray-200 dark:bg-gray-800 mb-2 transition-colors duration-500">
-  <a href="https://github.com/dansvel/sveltekit-typescript-postcss-tailwind2"><b>Github repo</b></a>
-</blockquote>
-<p>
-  Visit the <a href="https://svelte.dev">svelte.dev</a> to learn how to build Svelte apps. And read
-  the <a href="https://kit.svelte.dev/">Official SvelteKit Documentation</a> to learn more about nre
-  features.
-</p>
-<p>The title is using utility class, but all other elements is using style component.</p>
-<p>Just check <code>src/routes/index.svelte</code> to see the code.</p>
-
-<Timer />
-<Counter />
 
 <style lang="postcss">
-  p {
-    @apply text-lg;
-    @apply mt-0 mb-1;
-  }
-  code {
-    @apply transition-colors duration-500;
-    @apply px-1;
-    @apply bg-gray-200;
-    :global(.dark) & {
-      @apply bg-gray-800;
-    }
-  }
-  pre {
-    @apply transition-colors duration-500;
-    @apply text-left p-2 bg-gray-200;
-    :global(.dark) & {
-      @apply bg-gray-800;
-    }
-  }
+  
 </style>
