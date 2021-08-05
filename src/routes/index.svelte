@@ -11,8 +11,6 @@
     { id: '2', title: 'Meeting With Client', description: 'E-commerce App Test', status: 'Completed'}
   ]
 
-
-
 </script>
 
 <svelte:head>

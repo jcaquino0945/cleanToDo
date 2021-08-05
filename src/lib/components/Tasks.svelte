@@ -1,18 +1,12 @@
 <script lang="ts">
-import { onMount } from "svelte";
-
-
 	export let tasks;
-    console.log(tasks)
-
-    onMount(async () => {
-		 taskSort(); 
-    })
 
     function taskSort() {
         tasks.sort((a,b) => (a.status > b.status) ? 1 : ((b.status > a.status) ? -1 : 0))
     }
 
+  	taskSort(); 
+      
     function checkTask(item: any) {
         let updatedTask = {
         id:  item.id,
