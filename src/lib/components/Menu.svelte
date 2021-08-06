@@ -1,6 +1,6 @@
 <script lang="ts">
-export let name;
-let currentDate = new Date();
+    export let name;
+    let currentDate = new Date();
 </script>
 
 <div class="banner">
@@ -10,7 +10,7 @@ let currentDate = new Date();
             <p>{currentDate}</p>
         </div>
     </div>
-    </div>
+</div>
 
 <style lang="postcss">
 .banner {

@@ -1,16 +1,29 @@
 <script lang="ts">
     export let modalName, modalDescription,tasks,addPrompt;
 
-    let title, description,id;
+    let title = '', description = '',id;
+    let errorMsg = false;
 
     function addNewTask() {
+      if (title == '' && description == '') {
+        errorMsg = true;
+        console.log('wala laaman')
+      }
+      else if (title != '' && description != '') {
         let newTask = {
             id:  tasks.length + 1,
             title: title,
             description: description,
             status: 'Pending'
         }
-        return tasks.push(newTask), tasks = tasks
+        
+        title='';
+        description = '';
+
+        return tasks.push(newTask), 
+        tasks = tasks,
+        closePrompt();
+      }
     }
 
     function closePrompt() {
@@ -59,7 +72,7 @@
                   Title
                 </label>
                 <input id="title" type="text" placeholder="My New Task" bind:value={title}>
-                {#if !title}<!-- unchecked -->
+                {#if errorMsg == true}<!-- unchecked -->
                 <p class="modal-body-error">Please enter the title of your task.</p>{/if}
               </div>
               <div class="mb-4">
@@ -67,13 +80,13 @@
                   Description
                 </label>
                 <input id="description" type="text" placeholder="Description Of My New Task" bind:value={description}>
-                {#if !description}
+                {#if errorMsg == true}
                 <p class="modal-body-error">Please enter the description of your task.</p>{/if}
               </div>
             </div>
           </div>
         <div class="modal-btn-container">
-          <button type="button" class="modal-add-btn" disabled='{title == '' && description == ''}' on:click={() => addNewTask()}>
+          <button type="button" class="modal-add-btn" on:click={() => addNewTask()}>
             Add New Task
           </button>
           <button type="button" class="modal-cancel-btn" on:click={() => closePrompt()}>
@@ -89,7 +102,6 @@
     .addIcon {
         @apply h-8 w-8 z-50 right-4 bottom-5 text-white fixed bg-blue-500 rounded-full bg-clip-content bg-cover opacity-70
     }
-
     .modal-container {
       @apply fixed z-10 inset-0 overflow-y-auto
     }

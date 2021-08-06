@@ -4,7 +4,7 @@
     function taskSort() {
         tasks.sort((a,b) => (a.status > b.status) ? 1 : ((b.status > a.status) ? -1 : 0))
     }
-
+    
   	taskSort(); 
       
     function checkTask(item: any) {
@@ -14,7 +14,10 @@
         description: item.description,
         status: 'Completed'
         }
-        return tasks.splice(tasks.indexOf(item), 1), tasks.push(updatedTask), tasks = tasks, taskSort();
+        return tasks.splice(tasks.indexOf(item), 1),
+        tasks.push(updatedTask),
+        tasks = tasks, 
+        taskSort();
     }
 
     function unCheckTask(item: any) {
@@ -24,11 +27,16 @@
         description: item.description,
         status: 'Pending'
         }
-        return tasks.splice(tasks.indexOf(item), 1), tasks.push(updatedTask), tasks = tasks, taskSort();
+        return tasks.splice(tasks.indexOf(item), 1), 
+        tasks.push(updatedTask), 
+        tasks = tasks, 
+        taskSort();
     }
 
     function deleteTask(item:any) {
-    return tasks.splice(tasks.indexOf(item), 1), tasks = tasks, taskSort();
+        return tasks.splice(tasks.indexOf(item), 1), 
+        tasks = tasks, 
+        taskSort();
     }
 
 </script>
