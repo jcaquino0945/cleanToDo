@@ -32,7 +32,6 @@
     }
 
 </script>
-
 <div class="task-section">
     {#each tasks as task}
     <div class="task-container">

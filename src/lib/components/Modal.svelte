@@ -1,7 +1,6 @@
 <script lang="ts">
-    export let modalName, modalDescription,tasks,addPrompt,currentProp;
+    export let modalName, modalDescription,tasks,addPrompt;
 
-    console.log(currentProp)
     let title, description,id;
 
     function addNewTask() {
@@ -11,10 +10,7 @@
             description: description,
             status: 'Pending'
         }
-        console.log(newTask)
-        tasks = [...tasks, newTask];
-        currentProp = {};
-        console.log(tasks)
+        return tasks.push(newTask), tasks = tasks
     }
 
     function closePrompt() {
