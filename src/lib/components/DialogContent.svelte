@@ -1,10 +1,14 @@
 <script>
     export let message, type;
-    let comment,description;
+    let comment,description,title;
     console.log(type)
 
     function addComment() {
         console.log(comment)
+    }
+    function addTask() {
+        console.log(description)
+        console.log(title)
     }
 </script>
 
@@ -31,6 +35,33 @@
 <div class="modal-btn-container">
     <button type="button" class="modal-add-btn" on:click={() => addComment()}>
       Add Comment
+    </button>
+</div>
+{/if}
+
+{#if type == 'New Task'}
+<div class="modal-body">
+    <div class="modal-body-bg">
+        <div class="mb-4">
+          <label for="title">
+            Title
+          </label>
+          <input id="title" type="text" placeholder="Input your task title" bind:value={title}>
+          <p class="modal-body-error">Please input your task title here</p>
+        </div>
+        <div class="mb-4">
+            <label for="description">
+              Description
+            </label>
+            <input id="comment" type="text" placeholder="Input your description" bind:value={description}>
+            <p class="modal-body-error">Please input your task description here</p>
+          </div>
+      </div>
+</div>
+
+<div class="modal-btn-container">
+    <button type="button" class="modal-add-btn" on:click={() => addTask()}>
+      Add Task
     </button>
 </div>
 {/if}

@@ -8,8 +8,8 @@
   const showSurprise = () => {
     if (type == 'Comment') {
       open(DialogContent, { message: "Add a comment!" , type: "Comment"});
-    } else if (type == 'Add') {
-      open(DialogContent, { message: "Add a task!" });
+    } else if (type == 'New Task') {
+      open(DialogContent, { message: "Add a task!", type: "New Task"});
     }
   };
 </script>
@@ -21,6 +21,6 @@
 
 <style lang="postcss">
 .addIcon {
-        @apply h-6 w-6 mr-3;
+        @apply h-6 w-6;
     }
 </style>

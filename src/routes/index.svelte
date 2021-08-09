@@ -2,7 +2,8 @@
   import Navbar from '../lib/components/Navbar.svelte';
   import Menu from '../lib/components/Menu.svelte';
   import Tasks from '../lib/components/Tasks.svelte';
-
+  import Modal from 'svelte-simple-modal';
+  import DialogIcon from '../lib/components/DialogIcon.svelte';
   //import Modal from '../lib/components/Modal.svelte';
 
   let name = 'Miguel' // for banner name
@@ -50,10 +51,15 @@
 {#key tasks}
 <Tasks tasks={tasks}></Tasks>
 {/key}
-<!--
-<Modal modalName={'Add New Task'} modalDescription={'Input the title and description of your new task!'} tasks={tasks} addPrompt={addPrompt}></Modal>
--->
+
+<div class="addIcon">
+  <Modal>
+    <DialogIcon icon={'M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z'} type={'New Task'}/>
+</Modal>
+</div>
 
 <style lang="postcss">
-
+.addIcon {
+  @apply flex justify-center items-center h-8 w-8 z-50 right-4 bottom-5 text-white fixed bg-blue-500 rounded-full 
+}
 </style>
