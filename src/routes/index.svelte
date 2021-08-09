@@ -2,7 +2,8 @@
   import Navbar from '../lib/components/Navbar.svelte';
   import Menu from '../lib/components/Menu.svelte';
   import Tasks from '../lib/components/Tasks.svelte';
-  import Modal from '../lib/components/Modal.svelte';
+
+  //import Modal from '../lib/components/Modal.svelte';
 
   let name = 'Miguel' // for banner name
   export let tasks = [
@@ -49,10 +50,10 @@
 {#key tasks}
 <Tasks tasks={tasks}></Tasks>
 {/key}
+<!--
 <Modal modalName={'Add New Task'} modalDescription={'Input the title and description of your new task!'} tasks={tasks} addPrompt={addPrompt}></Modal>
-
-
+-->
 
 <style lang="postcss">
-  
+
 </style>
