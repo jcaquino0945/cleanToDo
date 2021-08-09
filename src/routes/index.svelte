@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { tasks } from '../lib/services/taskStore';
   import Navbar from '../lib/components/Navbar.svelte';
   import Menu from '../lib/components/Menu.svelte';
   import Tasks from '../lib/components/Tasks.svelte';
@@ -9,8 +7,6 @@
   //import Modal from '../lib/components/Modal.svelte';
 
   let name = 'Miguel' // for banner name
-  let myTasks = [];
-
 </script>
 
 <svelte:head>
@@ -46,9 +42,7 @@
 
 <Navbar></Navbar>
 <Menu name={name}></Menu>
-{#key myTasks}
 <Tasks></Tasks>
-{/key}
 <div class="addIcon">
   <Modal>
     <DialogIcon icon={'M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z'} type={'New Task'}/>

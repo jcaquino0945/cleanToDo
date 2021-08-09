@@ -15,16 +15,28 @@
     function taskSort() {
         myTasks.sort((a,b) => (a.status > b.status) ? 1 : ((b.status > a.status) ? -1 : 0))
     }
-
+    
     function addComment() {
-        console.log(comment)
+        /*
+        let newTask = {
+            id:  myTasks.length + 1,
+            title: title,
+            description: description,
+            status: 'Pending',
+            comments: [comment]
+        }
+        return myTasks.push(newTask), 
+        myTasks = myTasks
+        */
     }
+    
     function addTask() {
         let newTask = {
             id:  myTasks.length + 1,
             title: title,
             description: description,
-            status: 'Pending'
+            status: 'Pending',
+            comments: []
         }
         return myTasks.push(newTask), 
         myTasks = myTasks
@@ -32,9 +44,15 @@
 </script>
 
 <div class="dialog-header">
+    {#if type == 'Comment'}
     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
+    {:else if type == 'New Task'}
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" />
+    </svg>
+    {/if}
     <h1>{message}</h1>
 </div>
 
