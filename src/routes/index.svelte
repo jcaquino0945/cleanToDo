@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  import { tasks } from '../lib/services/taskStore';
   import Navbar from '../lib/components/Navbar.svelte';
   import Menu from '../lib/components/Menu.svelte';
   import Tasks from '../lib/components/Tasks.svelte';
@@ -7,12 +9,8 @@
   //import Modal from '../lib/components/Modal.svelte';
 
   let name = 'Miguel' // for banner name
-  export let tasks = [
-    { id: '0', title: 'Feed The Dogs!', description: 'Remember to feed phairo and phaira!', status: 'Pending'},
-    { id: '1', title: 'Study UI/UX Design Best Practices', description: 'Catch up on saved ui/ux videos on coursera', status: 'Pending'},
-    { id: '2', title: 'Meeting With Client', description: 'E-commerce App Test', status: 'Completed'}
-  ]
-    let addPrompt = false;
+  let myTasks = [];
+
 </script>
 
 <svelte:head>
@@ -48,10 +46,9 @@
 
 <Navbar></Navbar>
 <Menu name={name}></Menu>
-{#key tasks}
-<Tasks tasks={tasks}></Tasks>
+{#key myTasks}
+<Tasks></Tasks>
 {/key}
-
 <div class="addIcon">
   <Modal>
     <DialogIcon icon={'M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z'} type={'New Task'}/>

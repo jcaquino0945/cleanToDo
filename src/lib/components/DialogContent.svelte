@@ -1,14 +1,33 @@
 <script>
+    import { onMount } from 'svelte';
+    import { tasks } from '../services/taskStore';
     export let message, type;
+
     let comment,description,title;
-    console.log(type)
+    let myTasks = [];
+
+    onMount(async () => {
+		tasks.subscribe(val => {
+            myTasks = val; taskSort(); 
+	    });
+    })
+
+    function taskSort() {
+        myTasks.sort((a,b) => (a.status > b.status) ? 1 : ((b.status > a.status) ? -1 : 0))
+    }
 
     function addComment() {
         console.log(comment)
     }
     function addTask() {
-        console.log(description)
-        console.log(title)
+        let newTask = {
+            id:  myTasks.length + 1,
+            title: title,
+            description: description,
+            status: 'Pending'
+        }
+        return myTasks.push(newTask), 
+        myTasks = myTasks
     }
 </script>
 

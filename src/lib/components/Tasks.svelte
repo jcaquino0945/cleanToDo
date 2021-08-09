@@ -1,15 +1,21 @@
 <script lang="ts">
+    import { onMount } from 'svelte';
+    import { tasks } from '../services/taskStore';
     import Modal from 'svelte-simple-modal';
     import DialogIcon from '../components/DialogIcon.svelte';
 
-	export let tasks;
+    let myTasks = [];
+
+    onMount(async () => {
+		tasks.subscribe(val => {
+            myTasks = val; taskSort(); 
+	    });
+    })
 
     function taskSort() {
-        tasks.sort((a,b) => (a.status > b.status) ? 1 : ((b.status > a.status) ? -1 : 0))
+        myTasks.sort((a,b) => (a.status > b.status) ? 1 : ((b.status > a.status) ? -1 : 0))
     }
-    
-  	taskSort(); 
-      
+          
     function checkTask(item: any) {
         let updatedTask = {
         id:  item.id,
@@ -17,9 +23,9 @@
         description: item.description,
         status: 'Completed'
         }
-        return tasks.splice(tasks.indexOf(item), 1),
-        tasks.push(updatedTask),
-        tasks = tasks, 
+        return myTasks.splice(myTasks.indexOf(item), 1),
+        myTasks.push(updatedTask),
+        myTasks = myTasks, 
         taskSort();
     }
 
@@ -30,21 +36,21 @@
         description: item.description,
         status: 'Pending'
         }
-        return tasks.splice(tasks.indexOf(item), 1), 
-        tasks.push(updatedTask), 
-        tasks = tasks, 
+        return myTasks.splice(myTasks.indexOf(item), 1), 
+        myTasks.push(updatedTask), 
+        myTasks = myTasks, 
         taskSort();
     }
 
     function deleteTask(item:any) {
-        return tasks.splice(tasks.indexOf(item), 1), 
-        tasks = tasks, 
+        return myTasks.splice(myTasks.indexOf(item), 1), 
+        myTasks = myTasks, 
         taskSort();
     }
 
 </script>
 <div class="task-section">
-    {#each tasks as task}
+    {#each myTasks as task}
     <div class="task-container">
         <div class="task-container-left">
             {#if task.status == 'Pending'}<!-- unchecked -->
