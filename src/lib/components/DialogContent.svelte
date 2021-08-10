@@ -1,22 +1,19 @@
 <script>
-    import { onMount } from 'svelte';
-    import { tasks } from '../services/taskStore';
+    import { taskStore } from '../services/taskStore';
+    import { Task } from '../models/task';
+    import { createEventDispatcher } from 'svelte';
     export let message, type;
 
-    let comment,description,title;
-    let myTasks = [];
+    let comment,
+        description,
+        title;
 
-    onMount(async () => {
-		tasks.subscribe(val => {
-            myTasks = val; taskSort(); 
-	    });
-    })
+    let newTask = new Task();
 
-    function taskSort() {
-        myTasks.sort((a,b) => (a.status > b.status) ? 1 : ((b.status > a.status) ? -1 : 0))
-    }
-    
     function addComment() {
+        taskStore.add(newTask);
+        dispatcher.dispatch('onTaskAddedSuccessfully', {newTask});
+        // publish an event        
         /*
         let newTask = {
             id:  myTasks.length + 1,
@@ -31,6 +28,7 @@
     }
     
     function addTask() {
+        /*
         let newTask = {
             id:  myTasks.length + 1,
             title: title,
@@ -39,7 +37,8 @@
             comments: []
         }
         return myTasks.push(newTask), 
-        myTasks = myTasks
+        myTasks = myTasks,
+        console.log(myTasks)*/
     }
 </script>
 
@@ -83,15 +82,19 @@
           <label for="title">
             Title
           </label>
-          <input id="title" type="text" placeholder="Input your task title" bind:value={title}>
+          <input id="title" type="text" placeholder="Input your task title" bind:value={newTask.title}>
+          {#if !title}
           <p class="modal-body-error">Please input your task title here</p>
+          {/if}
         </div>
         <div class="mb-4">
             <label for="description">
               Description
             </label>
             <input id="comment" type="text" placeholder="Input your description" bind:value={description}>
+            {#if !description}
             <p class="modal-body-error">Please input your task description here</p>
+            {/if}
           </div>
       </div>
 </div>

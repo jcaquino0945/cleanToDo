@@ -16,10 +16,8 @@
             description: description,
             status: 'Pending'
         }
-        
         title='';
         description = '';
-
         return tasks.push(newTask), 
         tasks = tasks,
         closePrompt();

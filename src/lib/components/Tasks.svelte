@@ -1,17 +1,21 @@
 <script lang="ts">
     import { afterUpdate } from 'svelte'
     import { onMount } from 'svelte';
-    import { tasks } from '../services/taskStore';
+    import { taskStore } from '../services/taskStore';
     import Modal from 'svelte-simple-modal';
     import DialogIcon from '../components/DialogIcon.svelte';
 
     let myTasks = [];
 
     onMount(async () => {
-		tasks.subscribe(val => {
-            myTasks = val; taskSort(); 
-	    });
+		myTasks = taskStore.getAll();
     })
+
+// listen for onTaskAddedSuccessfully event
+
+    function onTaskAddedSuccessfully() {
+        myTasks = taskStore.getAll();
+    }
 
     afterUpdate(() => {
 		console.log(myTasks);
@@ -23,12 +27,12 @@
           
     function checkTask(item: any) {
         let updatedTask = {
-        id:  item.id,
-        title: item.title,
-        description: item.description,
-        status: 'Completed',
-        comments: item.comments
-        }
+            id:  item.id,
+            title: item.title,
+            description: item.description,
+            status: 'Completed',
+            comments: item.comments
+        } //fix code layout
         return myTasks.splice(myTasks.indexOf(item), 1),
         myTasks.push(updatedTask),
         myTasks = myTasks, 
@@ -37,12 +41,12 @@
 
     function unCheckTask(item: any) {
         let updatedTask = {
-        id:  item.id,
-        title: item.title,
-        description: item.description,
-        status: 'Pending',
-        comments: item.comments
-        }
+            id:  item.id,
+            title: item.title,
+            description: item.description,
+            status: 'Pending',
+            comments: item.comments
+        } //fix code layout
         return myTasks.splice(myTasks.indexOf(item), 1), 
         myTasks.push(updatedTask), 
         myTasks = myTasks, 

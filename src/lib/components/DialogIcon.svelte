@@ -1,15 +1,15 @@
 <script lang="ts">
   export let icon,type;
   import { getContext } from 'svelte';
-  import DialogContent from './DialogContent.svelte';
-
+  import CommentDialog from './commentDialog.svelte';
+  import NewTaskDialog from './NewTaskDialog.svelte';
   const { open } = getContext('simple-modal');
 
   const showSurprise = () => {
     if (type == 'Comment') {
-      open(DialogContent, { message: "Add a comment!" , type: "Comment"});
+      open(CommentDialog, { message: "Add a comment!" , type: "Comment"});
     } else if (type == 'New Task') {
-      open(DialogContent, { message: "Add a task!", type: "New Task"});
+      open(NewTaskDialog, { message: "Add a task!", type: "New Task"});
     }
   };
 </script>
