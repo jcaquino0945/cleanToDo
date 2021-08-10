@@ -18,6 +18,7 @@
     }
 
     afterUpdate(() => {
+        console.log('updated')
 		console.log(myTasks);
 	});
 
@@ -60,8 +61,8 @@
     }
 
 </script>
+{#key myTasks}
 <div class="task-section">
-    {#key myTasks}
     {#each myTasks as task}
     <div class="task-container">
         <div class="task-container-left">
@@ -102,8 +103,9 @@
         </div>
     </div>
     {/each}
-    {/key}
 </div>
+	{/key}
+
 
 <style lang="postcss">
 .task-section {

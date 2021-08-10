@@ -5,10 +5,18 @@
     export let message, type;
 
     let newTask = new Task();
+	const dispatch = createEventDispatcher();
 
     function addTask() {
         taskStore.add(newTask)
+        sayHello();
     }
+    
+    function sayHello() {
+		dispatch('message', {
+			text: 'Added New Task!'
+		});
+	}
 </script>
 
 <div class="dialog-header">

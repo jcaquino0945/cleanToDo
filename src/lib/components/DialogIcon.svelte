@@ -12,6 +12,8 @@
       open(NewTaskDialog, { message: "Add a task!", type: "New Task"});
     }
   };
+
+  
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" class="addIcon" viewBox="0 0 20 20" fill="currentColor" on:click={showSurprise}>

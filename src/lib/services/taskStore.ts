@@ -26,12 +26,13 @@ class TaskStore {
     }
 
     add(t:Task) : Task {
-        t.id = '' + this.tasks.length + 1;
+        t.id = (this.tasks.length + 1).toString();
         t.status = 'Pending';
         t.comments = [];
 
         console.log(t)
         this.tasks.push(t)
+        this.tasks = this.tasks
         return t;
         /*
         this.tasks.push(t);
@@ -40,6 +41,36 @@ class TaskStore {
 
     getAll() : Task[] {
         return this.tasks;
+    }
+
+    checkTask(t:Task) : Task {
+        t.id = t.id;
+        t.status = 'Completed';
+        t.comments = t.comments;
+        t.title = t.title
+        t.description = t.description
+        console.log(t)
+        this.tasks.splice(this.tasks.indexOf(t),1)
+        this.tasks.push(t)
+        this.tasks = this.tasks
+
+        console.log(this.tasks)
+        return t;
+    }
+
+    unCheckTask(t:Task) : Task {
+        t.id = t.id;
+        t.status = 'Pending';
+        t.comments = t.comments;
+        t.title = t.title
+        t.description = t.description
+        console.log(t)
+        this.tasks.splice(this.tasks.indexOf(t),1)
+        this.tasks.push(t)
+        this.tasks = this.tasks
+
+        console.log(this.tasks)
+        return t;
     }
 }
 
