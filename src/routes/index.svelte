@@ -5,7 +5,9 @@
   import DialogIcon from '../lib/components/DialogIcon.svelte';
   import Modal from 'svelte-simple-modal';
   import TaskList from '../lib/components/TaskList.svelte'
+
   let name = 'Miguel'; // for banner name
+
 
   //import Modal from '../lib/components/Modal.svelte';
 </script>
