@@ -19,6 +19,11 @@
     function addTask() {
         taskStore.add(newTask)
         sayHello();
+        //clear binded fields
+        newTask.title = '';
+        newTask.description = '';
+        //close modal after clear
+        closeModal();
     }
 
     function sayHello() {

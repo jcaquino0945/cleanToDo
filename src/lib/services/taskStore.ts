@@ -19,20 +19,25 @@ class TaskStore {
                 id: '1', 
                 title: 'Study UI/UX Design Best Practices', 
                 description: 'Catch up on saved ui/ux videos on coursera', 
-                status: 'Pending', 
+                status: 'Completed', 
                 comments:[]
             }
         ];
     }
 
-    add(t:Task) : Task {
-        t.id = (this.tasks.length + 1).toString();
-        t.status = 'Pending';
-        t.comments = [];
+    add(t) {
+        let newTask = {
+            id: (this.tasks.length + 1).toString(),
+            status: 'Pending',
+            comments: [],
+            title: t.title,
+            description: t.description
+        }
 
-        console.log(t)
-        this.tasks.push(t)
+        this.tasks.push(newTask)
         this.tasks = this.tasks
+        
+        console.log(this.tasks)
         return t;
         /*
         this.tasks.push(t);
