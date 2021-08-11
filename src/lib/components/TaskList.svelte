@@ -3,7 +3,6 @@
     import { onMount } from 'svelte';
     import { taskStore } from '../services/taskStore';
     import Task from './Task.svelte'
-    import DialogIcon from './DialogIcon.svelte'
     export const modal = writable(null);
     import NewTaskDialog from './NewTaskDialog.svelte'
 
@@ -12,10 +11,6 @@
     onMount(async () => {
 		myTasks = taskStore.getAll();
     })
-
-    function showModal() {
-    modal.set(NewTaskDialog)
-    }
 
     function taskSort() {
         myTasks.sort((a,b) => (a.status > b.status) ? 1 : ((b.status > a.status) ? -1 : 0))

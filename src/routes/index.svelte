@@ -2,8 +2,6 @@
   import Navbar from '../lib/components/Navbar.svelte';
   import Menu from '../lib/components/Menu.svelte';
   //import Tasks from '../lib/components/Tasks.svelte';
-  import DialogIcon from '../lib/components/DialogIcon.svelte';
-  import Modal from 'svelte-simple-modal';
   import TaskList from '../lib/components/TaskList.svelte'
 
   let name = 'Miguel'; // for banner name
@@ -46,19 +44,7 @@
 <Navbar></Navbar>
 <Menu name={name}></Menu>
 <TaskList></TaskList>
-<!--
-<Tasks></Tasks>
-
-
-<div class="addIcon">
-  <Modal >
-    <DialogIcon type={'New Task'} icon={"M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"}/>
-  </Modal>
-</div>-->
-
 
 <style lang="postcss">
-.addIcon {
-  @apply h-8 w-8 z-50 right-4 bottom-5 text-white fixed bg-blue-500 rounded-full bg-clip-content bg-cover flex justify-center items-center;
-}
+
 </style>

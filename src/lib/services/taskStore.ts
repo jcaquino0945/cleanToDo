@@ -72,6 +72,14 @@ class TaskStore {
         console.log(this.tasks)
         return t;
     }
+
+    deleteTask(t:Task) : Task {
+        this.tasks.splice(this.tasks.indexOf(t), 1)
+        this.tasks = this.tasks
+
+        return t;
+    }
+    
 }
 
 export const taskStore = new TaskStore();
