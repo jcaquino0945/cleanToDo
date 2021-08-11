@@ -10,6 +10,7 @@
 
     onMount(async () => {
 		myTasks = taskStore.getAll();
+        taskSort()
     })
 
     function taskSort() {

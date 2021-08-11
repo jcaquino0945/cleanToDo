@@ -25,8 +25,8 @@ class TaskStore {
         ];
     }
 
-    add(t) {
-        let newTask = {
+    add(t:Task): Task {
+        let newTask:Task = {
             id: (this.tasks.length + 1).toString(),
             status: 'Pending',
             comments: [],
@@ -43,6 +43,19 @@ class TaskStore {
         this.tasks.push(t);
         return t;*/
     };
+
+    addComment(t:Task): Task {
+        t.id = t.id;
+        t.status = t.status;
+        t.comments.push('aa')
+        t.title = t.title
+        t.description = t.description
+        this.tasks.splice(this.tasks.indexOf(t),1)
+        this.tasks.push(t)
+        this.tasks = this.tasks
+
+        return t
+    }
 
     getAll() : Task[] {
         return this.tasks;
