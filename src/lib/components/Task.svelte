@@ -2,7 +2,9 @@
     import { taskStore } from '../services/taskStore';
     import type { Task } from '../models/task';
     import { createEventDispatcher } from 'svelte';
+    import  CommentDialog from './CommentDialog.svelte';
     export let task;
+    let taskInfo;
 
     const dispatch = createEventDispatcher();
     
@@ -24,20 +26,17 @@
         return task;
     }
 
-    function addComment(task: Task) : Task {
-        taskStore.addComment(task)
-        dispatchMsg();
-        return task
-    }
-    
     function dispatchMsg() {
 		dispatch('message', {
 			text: 'Updated Task Status!'
 		});
 	}
 
+
+
 </script>
 
+<div class="task">
 <div class="task-container">
     <div class="task-container-left">
         {#if task.status == 'Pending'}<!-- unchecked -->
@@ -67,19 +66,37 @@
         {/if}
     </div>
     <div class="task-container-right">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor" on:click={() => addComment(task)}>
-            <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
-          </svg>
+        <CommentDialog taskInfo={task} on:message={dispatchMsg}></CommentDialog>
+        
 
         <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 ml-1" viewBox="0 0 20 20" fill="currentColor" on:click={() => deleteTask(task)}>
             <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
-          </svg>
+        </svg>
     </div>
+</div>
+<div class="comments">
+    {#each task.comments as comments}
+        <p><span class="comment-author">Miguel Aquino </span>{comments}</p>
+    {/each}
+</div>
 </div>
 
 <style lang="postcss">
+.task {
+    @apply shadow mb-1
+}
+.comments {
+     @apply px-12 py-2
+}
+.comment-author {
+    @apply font-bold pr-4;
+}
+.comments p {
+    display: block;
+    font-family: 'Abel', sans-serif;
+}
 .task-container {
-    @apply flex justify-center items-center py-2 shadow mb-1;
+    @apply flex justify-center items-center py-2 ;
 }
 .task-container-left {
     @apply w-1/6 flex justify-center items-center pl-7
@@ -99,5 +116,5 @@
 }
 .task-section>div:nth-child(even){
     background-color:rgb(243, 243, 243);
-   }
+}
 </style>

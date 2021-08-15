@@ -4,9 +4,11 @@
     import { createEventDispatcher } from 'svelte';
     import { toastService } from '../services/toastService';
     const dispatch = createEventDispatcher();
+    export let taskInfo;
 
-    let newTask = new Task();
+    let comment:string;
     let open = false;
+
 
     function openModal() {
         open = true;
@@ -16,30 +18,24 @@
         open = false;
     }
 
-    function addTask() {
-        taskStore.add(newTask)
-        sayHello();
-        //clear binded fields
-        newTask.title = '';
-        newTask.description = '';
-        //close modal after clear
+    function addComment() {
+        taskStore.addComment(taskInfo, comment)
+        dispatchComment();
+        toastService.publish('User has uploaded a new comment');
         closeModal();
     }
 
-    function sayHello() { //change naming convetion (ex. onTaskAdded)
-		  dispatch('message', {
-			  text: 'Added New Task!'
-		  });
-	  }
+    function dispatchComment() {
+		dispatch('message', {
+			text: 'Added Comment In Task!'
+		});
+	}
 
 </script>
 
-<div class="addIcon">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" on:click={() => openModal()}>
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-</div>
-
+<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor" on:click={() => openModal()}>
+    <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
+</svg>
 
 {#if open == true}
 <div class="modal-container" aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -50,17 +46,17 @@
         <div class="modal-bg">
           <div class="modal-header">
             <div class="modal-header-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
+                </svg>
             </div>
             <div class="modal-header-title">
               <h3 id="modal-title">
-                Add New Task
+                Add Comment
               </h3>
               <div class="mt-2">
                 <p>
-                  Input the title and description of your new task!
+                  Input Your Comment For This Task
                 </p>
               </div>
             </div>
@@ -69,26 +65,18 @@
         <div class="modal-form-container">
             <div class="modal-form">
               <div class="mb-4">
-                <label for="title">
-                  Title
+                <label for="comment">
+                  Comment
                 </label>
-                <input id="title" type="text" placeholder="My New Task" bind:value={newTask.title}>
-                {#if newTask.title == ''}<!-- unchecked -->
-                <p class="error-msg">Please enter the title of your task.</p>{/if} <!-- find form validators-->
-              </div>
-              <div class="mb-4">
-                <label for="description">
-                  Description
-                </label>
-                <input id="description" type="text" placeholder="Description Of My New Task" bind:value={newTask.description}>
-                {#if newTask.description == ''}
-                <p class="error-msg">Please enter the description of your task.</p>{/if} <!-- find form validators-->
+                <input id="comment" type="text" placeholder="Don't Forgot To Do This!" bind:value={comment}>
+                {#if comment == ''}<!-- unchecked -->
+                <p class="error-msg">Please enter your comment for this task</p>{/if} <!-- find form validators-->
               </div>
             </div>
           </div>
         <div class="modal-buttons">
-          <button type="button" class="addBtn" disabled='{newTask.title == '' && newTask.description == ''}' on:click={() => addTask()}>
-            Add New Task
+          <button type="button" class="addBtn" on:click={() => addComment()}>
+            Add Comment
           </button>
           <button type="button" class="cancelBtn" on:click={() => closeModal()}>
             Cancel
@@ -156,8 +144,5 @@
 }
 .cancelBtn {
     @apply mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm
-}
-.addIcon {
-  @apply h-8 w-8 z-50 right-4 bottom-5 text-white fixed bg-blue-500 rounded-full bg-clip-content bg-cover flex justify-center items-center;
 }
 </style>

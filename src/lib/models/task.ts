@@ -1,8 +1,8 @@
 export class Task {
-    id!: string;
-    title!: string;
-    description!: string;
-    status!: string;
+    id: string;
+    title: string;
+    description: string;
+    status: string;
     comments: string[];
 }
   

@@ -1,6 +1,15 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
+    import { toastService } from '$lib/services/toastService';
+
     export let name;
     let currentDate = new Date();
+
+    onMount(() => {
+        toastService.subscribe((message) => {
+            alert(message);
+        });
+    })    
 </script>
 
 <div class="banner">

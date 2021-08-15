@@ -43,7 +43,7 @@
 
 <Navbar></Navbar>
 <Menu name={name}></Menu>
-<TaskList></TaskList>
+<TaskList ></TaskList>
 
 <style lang="postcss">
 

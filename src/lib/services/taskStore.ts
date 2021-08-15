@@ -33,28 +33,26 @@ class TaskStore {
             title: t.title,
             description: t.description
         }
-
         this.tasks.push(newTask)
         this.tasks = this.tasks
         
-        console.log(this.tasks)
         return t;
         /*
         this.tasks.push(t);
         return t;*/
     };
 
-    addComment(t:Task): Task {
+    addComment(t:Task,comment:string): Task {
         t.id = t.id;
         t.status = t.status;
-        t.comments.push('aa')
+        t.comments.push(comment)
         t.title = t.title
         t.description = t.description
         this.tasks.splice(this.tasks.indexOf(t),1)
         this.tasks.push(t)
         this.tasks = this.tasks
 
-        return t
+        return t;
     }
 
     getAll() : Task[] {
