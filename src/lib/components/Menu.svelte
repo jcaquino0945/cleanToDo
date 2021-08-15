@@ -18,7 +18,7 @@
             }, 300);
         });
     })
-        
+
 </script>
 {#if notifPrompt == true}
 <div class="notif-container" transition:fade>
@@ -32,7 +32,7 @@
        </div>
        <!-- message -->
        <div class="notif-text">
-         A user has uploaded a comment!
+         You have uploaded a comment!
        </div>
      </div>
 </div>
